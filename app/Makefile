@@ -22,7 +22,7 @@ test:
 	./gradlew test
 
 report:
-	./gradlew jacocoTestReport
+	cd app && ./gradlew jacocoTestReport
 
 build-run: build run
 
