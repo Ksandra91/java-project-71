@@ -18,8 +18,8 @@ public class AppTest {
                 + "  + verbose: true\n"
                 + "}";
 
-        String actual = Differ.generate("app/src/test/resources/testfile1.json",
-                "app/src/test/resources/testfile2.json");
+        String actual = Differ.generate("src/test/resources/testfile1.json",
+                "src/test/resources/testfile2.json");
         assertEquals(expected, actual);
     }
 
@@ -32,8 +32,8 @@ public class AppTest {
                 + "  - timeout: 50\n"
                 + "}";
 
-        String actual = Differ.generate("app/src/test/resources/testfile1.json",
-                "app/src/test/resources/testfile3.json");
+        String actual = Differ.generate("src/test/resources/testfile1.json",
+                "src/test/resources/testfile3.json");
         assertEquals(expected, actual);
     }
 
