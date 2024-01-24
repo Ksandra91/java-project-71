@@ -33,14 +33,14 @@ public class Differ {
         for (String key : keys) {
 
             if (!json1.containsKey(key)) {
-                result.put("+ " + key, ": " + json2.get(key));
+                result.put("  + " + key, ": " + json2.get(key));
             } else if (!json2.containsKey(key)) {
-                result.put("- " + key, ": " + json1.get(key));
+                result.put("  - " + key, ": " + json1.get(key));
             } else if (json1.get(key).equals(json2.get(key))) {
-                result.put("  " + key, ": " + json2.get(key));
+                result.put("    " + key, ": " + json2.get(key));
             } else {
-                result.put("- " + key, ": " + json1.get(key));
-                result.put("+ " + key, ": " + json2.get(key));
+                result.put("  - " + key, ": " + json1.get(key));
+                result.put("  + " + key, ": " + json2.get(key));
             }
         }
 
