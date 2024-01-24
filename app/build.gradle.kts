@@ -2,6 +2,7 @@ plugins {
     //id("java")
     application
     checkstyle
+    jacoco
 }
 
 group = "hexlet.code"
@@ -28,3 +29,9 @@ application {
 tasks.test {
     useJUnitPlatform()
 }
+
+
+
+
+tasks.jacocoTestReport { reports { xml.required.set(true) } }
+
