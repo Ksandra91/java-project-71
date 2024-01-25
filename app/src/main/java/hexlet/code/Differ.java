@@ -16,35 +16,39 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Differ {
 
-    public static String generate(String filepath1, String filepath2) throws IOException {
+    public static String generate(String format, String filepath1, String filepath2) throws IOException {
 
         Path path1 = Paths.get(filepath1).toAbsolutePath().normalize();
         Path path2 = Paths.get(filepath2).toAbsolutePath().normalize();
 
-        String content1 = Files.readString(path1);
-        String content2 = Files.readString(path2);
+        Map<String, String> map1;
+        Map<String, String> map2;
 
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> json1 = mapper.readValue(content1, new TypeReference<>() {
-        });
-        Map<String, String> json2 = mapper.readValue(content2, new TypeReference<>() {
-        });
+        if (format.equals("yaml")) {
+            map1 = Parser.parseYaml(filepath1);
+            map2 = Parser.parseYaml(filepath2);
+        } else {
+            String content1 = Files.readString(path1);
+            String content2 = Files.readString(path2);
+            map1 = Parser.parseJson(content1);
+            map2 = Parser.parseJson(content2);
+        }
 
         Map<String, String> result = new LinkedHashMap<>();
-        Set<String> keys = new TreeSet<>(json1.keySet());
-        keys.addAll(json2.keySet());
+        Set<String> keys = new TreeSet<>(map1.keySet());
+        keys.addAll(map2.keySet());
 
         for (String key : keys) {
 
-            if (!json1.containsKey(key)) {
-                result.put("  + " + key, ": " + json2.get(key));
-            } else if (!json2.containsKey(key)) {
-                result.put("  - " + key, ": " + json1.get(key));
-            } else if (json1.get(key).equals(json2.get(key))) {
-                result.put("    " + key, ": " + json2.get(key));
+            if (!map1.containsKey(key)) {
+                result.put("  + " + key, ": " + map2.get(key));
+            } else if (!map2.containsKey(key)) {
+                result.put("  - " + key, ": " + map1.get(key));
+            } else if (map1.get(key).equals(map2.get(key))) {
+                result.put("    " + key, ": " + map2.get(key));
             } else {
-                result.put("  - " + key, ": " + json1.get(key));
-                result.put("  + " + key, ": " + json2.get(key));
+                result.put("  - " + key, ": " + map1.get(key));
+                result.put("  + " + key, ": " + map2.get(key));
             }
         }
 

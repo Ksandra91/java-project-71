@@ -23,12 +23,13 @@ public class App {
 
         @Override
         public String call() throws IOException {
-            System.out.println(Differ.generate(filepath1, filepath2));
-            return Differ.generate(filepath1, filepath2);
+            System.out.println(Differ.generate(format, filepath1, filepath2));
+            return Differ.generate(format, filepath1, filepath2);
         }
     }
 
     public static void main(String[] args) throws IOException {
         new CommandLine(new GenDiff()).execute(args);
+
     }
 }
