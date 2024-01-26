@@ -1,28 +1,41 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Parser {
 
-    public static Map<String, String> parseYaml(String filePth) throws IOException {
+
+    private static Map parseYaml(String content) throws Exception {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        Map <String,String> yml = mapper.readValue(new File(filePth),Map.class);
-        return yml;
+        if (content.isEmpty()) {
+            return new HashMap();
+        } else {
+            return mapper.readValue(content, Map.class);
+        }
     }
 
-    public static Map <String,String> parseJson(String fileContent) throws JsonProcessingException {
+    private static Map parseJson(String content) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> json = mapper.readValue(fileContent, new TypeReference<>() {
-        });
-        return json;
+        if (content.isEmpty()) {
+            return new HashMap();
+        } else {
+            return mapper.readValue(content, Map.class);
+        }
     }
 
+    public static Map parse(String content, String dataFormat) throws Exception {
+        switch (dataFormat) {
+            case "yml":
+            case "yaml":
+                return parseYaml(content);
+            case "":
+                return parseJson(content);
+            default:
+                throw new Exception("Unknown format: '" + dataFormat + "'");
+        }
+    }
 }

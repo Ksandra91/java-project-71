@@ -22,7 +22,7 @@ public class App {
         private String format;
 
         @Override
-        public String call() throws IOException {
+        public String call() throws Exception {
             System.out.println(Differ.generate(format, filepath1, filepath2));
             return Differ.generate(format, filepath1, filepath2);
         }
