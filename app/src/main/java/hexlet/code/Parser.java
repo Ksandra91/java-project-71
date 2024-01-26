@@ -32,7 +32,7 @@ public class Parser {
             case "yml":
             case "yaml":
                 return parseYaml(content);
-            case "":
+            case "json":
                 return parseJson(content);
             default:
                 throw new Exception("Unknown format: '" + dataFormat + "'");

@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class Differ {
@@ -23,8 +22,8 @@ public class Differ {
         Map<String, Object> parseMap2 = Parser.parse(content2, format);
 
 
-        Map<String, String> map1 = convertToStringMap(parseMap1);
-        Map<String, String> map2 = convertToStringMap(parseMap2);
+        Map<String, String> map1 = Formatter.convertToStringMap(parseMap1);
+        Map<String, String> map2 = Formatter.convertToStringMap(parseMap2);
 
 
         Map<String, String> result = new LinkedHashMap<>();
@@ -44,28 +43,8 @@ public class Differ {
                 result.put("  + " + key, ": " + map2.get(key));
             }
         }
-        return mapToString(result);
+        return Formatter.mapToString(result);
     }
 
-    public static Map<String, String> convertToStringMap(Map<String, Object> parseMap) {
-        Map<String, String> map = new HashMap<>();
-        for (var entry : parseMap.entrySet()) {
-            var key = entry.getKey();
-            var value = entry.getValue();
-            map.put(key, String.valueOf(value));
-        }
-        return map;
-    }
 
-    public static String mapToString(Map<String, String> map) {
-        StringBuilder stringBuilder = new StringBuilder("{");
-
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            stringBuilder.append("\n");
-            stringBuilder.append(entry.getKey()).append(entry.getValue());
-        }
-        stringBuilder.append("\n").append("}");
-
-        return stringBuilder.toString();
-    }
 }
