@@ -5,21 +5,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class AppTest {
-//    @Test
-//    public void testPositiveJson() throws Exception {
-//        String expected = "{\n"
-//                + "  - follow: false\n"
-//                + "    host: hexlet.io\n"
-//                + "  - proxy: 123.234.53.22\n"
-//                + "  - timeout: 50\n"
-//                + "  + timeout: 20\n"
-//                + "  + verbose: true\n"
-//                + "}";
-//
-//        String actual = Differ.generate("", "src/test/resources/testfile1.json",
-//                "src/test/resources/testfile2.json");
-//        assertEquals(expected, actual);
-//    }
+    @Test
+    public void testPositiveJson() throws Exception {
+        String expected = "{\n"
+                + "  - follow: false\n"
+                + "    host: hexlet.io\n"
+                + "  - proxy: 123.234.53.22\n"
+                + "  - timeout: 50\n"
+                + "  + timeout: 20\n"
+                + "  + verbose: true\n"
+                + "}";
+
+        String actual = Differ.generate("json", "src/test/resources/testfile1.json",
+                "src/test/resources/testfile2.json");
+        System.out.println(actual);
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void testPositiveJson2() throws Exception {
@@ -51,7 +52,7 @@ public class AppTest {
 
         String actual = Differ.generate("json", "src/test/resources/testfile11.json",
                 "src/test/resources/testfile22.json");
-       // System.out.println(actual);
+        System.out.println(actual);
         assertEquals(expected, actual);
     }
 
@@ -66,27 +67,28 @@ public class AppTest {
 
         String actual = Differ.generate("json", "src/test/resources/testfile1.json",
                 "src/test/resources/testfile3.json");
+        System.out.println(actual);
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    public void testPositiveYml() throws Exception {
-//        String expected = "{\n"
-//                + "  - follow: false\n"
-//                + "    host: hexlet.io\n"
-//                + "  - proxy: 123.234.53.22\n"
-//                + "  - timeout: 50\n"
-//                + "  + timeout: 20\n"
-//                + "  + verbose: true\n"
-//                + "}";
-//
-//        String actual = Differ.generate("yaml", "src/test/resources/testYaml1.yml",
-//                "src/test/resources/testYaml2.yml");
-//        assertEquals(expected, actual);
-//    }
-
     @Test
     public void testPositiveYml() throws Exception {
+        String expected = "{\n"
+                + "  - follow: false\n"
+                + "    host: hexlet.io\n"
+                + "  - proxy: 123.234.53.22\n"
+                + "  - timeout: 50\n"
+                + "  + timeout: 20\n"
+                + "  + verbose: true\n"
+                + "}";
+        String actual = Differ.generate("yaml", "src/test/resources/testYaml1.yml",
+                "src/test/resources/testYaml2.yml");
+        System.out.println(actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testPositiveYml2() throws Exception {
         String expected = "{\n"
                 + "    chars1: [a, b, c]\n"
                 + "  - chars2: [d, e, f]\n"
@@ -115,6 +117,7 @@ public class AppTest {
 
         String actual = Differ.generate("yaml", "src/test/resources/testYaml11.yml",
                 "src/test/resources/testYaml22.yml");
+        System.out.println(actual);
         assertEquals(expected, actual);
     }
 
@@ -129,6 +132,7 @@ public class AppTest {
 
         String actual = Differ.generate("yaml", "src/test/resources/testYaml1.yml",
                 "src/test/resources/testYaml3.yml");
+        System.out.println(actual);
         assertEquals(expected, actual);
     }
 

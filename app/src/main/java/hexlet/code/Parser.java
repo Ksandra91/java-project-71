@@ -21,7 +21,7 @@ public class Parser {
     private static Map parseJson(String content) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         if (content.isEmpty()) {
-            return new HashMap();
+            return new HashMap<>();
         } else {
             return mapper.readValue(content, Map.class);
         }
