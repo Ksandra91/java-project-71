@@ -23,31 +23,25 @@ public class Differ {
         Map<String, Object> parse1 = Parser.parse(content1, dataFormat);
         Map<String, Object> parse2 = Parser.parse(content2, dataFormat);
 
-        Map<String, String> parseMap1 = normalize(parse1);
-        Map<String, String> parseMap2 = normalize(parse2);
+        Map<String, Object> parseMap1 = normalize(parse1);
+        Map<String, Object> parseMap2 = normalize(parse2);
 
         Map<String, Map<String, Object>> result = findDiff(parseMap1, parseMap2);
 
 
         //System.out.println(result);
 
-
-        return switch (format) {
-            case "stylish" -> StylishFormatter.format(result);
-            //case "yml", "yaml" -> SimpleFormatter.format(result);
-            // case "json" -> SimpleFormatter.format(result);
-            default -> throw new Exception("Unknown format: '" + format + "'");
-        };
+        return Formatter.format(format, result);
         // return SimpleFormatter.format(result);
     }
 
-    public static Map<String, String> normalize(Map<String, Object> map) {
-        Map<String, String> res = new HashMap<>();
+    public static Map<String, Object> normalize(Map<String, Object> map) {
+        Map<String, Object> res = new HashMap<>();
         for (var e : map.entrySet()) {
             String key = e.getKey();
             Object valueOb = e.getValue();
             if (valueOb != null) {
-                res.put(key, valueOb.toString());
+                res.put(key, valueOb);
             } else {
                 res.put(key, "null");
             }
@@ -55,8 +49,8 @@ public class Differ {
         return res;
     }
 
-    public static Map<String, Map<String, Object>> findDiff(Map<String, String> parseMap1,
-                                                            Map<String, String> parseMap2) {
+    public static Map<String, Map<String, Object>> findDiff(Map<String, Object> parseMap1,
+                                                            Map<String, Object> parseMap2) {
         Map<String, Map<String, Object>> result = new LinkedHashMap<>();
         Set<String> keys = new TreeSet<>(parseMap1.keySet());
         keys.addAll(parseMap2.keySet());

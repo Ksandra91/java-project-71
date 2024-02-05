@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.formatters;
 
 import java.util.Map;
 
@@ -45,6 +45,7 @@ public class StylishFormatter {
 
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             value = entry.getValue().toString();
+
         }
         return value;
     }

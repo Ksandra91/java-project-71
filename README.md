@@ -8,13 +8,20 @@ Console application that finds the difference between files of different formats
 [![Test Coverage](https://api.codeclimate.com/v1/badges/060975d606885a91d61b/test_coverage)](https://codeclimate.com/github/Ksandra91/java-project-71/test_coverage)
 
 **JSON diff**
+
 [demo](https://asciinema.org/a/TbeekrtJAMVCSH6GDfnrAJZ3H)
 
 **YAML diff**
+
 [demo](https://asciinema.org/a/J7f7fXhkLPMJ11cgF6T1GnOJk)
 
 **Nested diff**
+
 [demo](https://asciinema.org/a/pOkptriYZ9JjMC7iQj9FT5pEV)
+
+**Plain diff**
+ 
+[demo](https://asciinema.org/a/lFlrSv7LbLl2ecSrQAIO14fg6)
 
 
 
