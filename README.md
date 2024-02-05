@@ -13,6 +13,10 @@ Console application that finds the difference between files of different formats
 **YAML diff**
 [demo](https://asciinema.org/a/J7f7fXhkLPMJ11cgF6T1GnOJk)
 
+**Nested diff**
+[demo](https://asciinema.org/a/pOkptriYZ9JjMC7iQj9FT5pEV)
+
+
 
 ## How to install and run
 

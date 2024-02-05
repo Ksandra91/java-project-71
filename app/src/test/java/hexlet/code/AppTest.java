@@ -16,7 +16,7 @@ public class AppTest {
                 + "  + verbose: true\n"
                 + "}";
 
-        String actual = Differ.generate("json", "src/test/resources/testfile1.json",
+        String actual = Differ.generate("stylish", "src/test/resources/testfile1.json",
                 "src/test/resources/testfile2.json");
         System.out.println(actual);
         assertEquals(expected, actual);
@@ -50,7 +50,7 @@ public class AppTest {
                 + "  + setting3: none\n"
                 + "}";
 
-        String actual = Differ.generate("json", "src/test/resources/testfile11.json",
+        String actual = Differ.generate("stylish", "src/test/resources/testfile11.json",
                 "src/test/resources/testfile22.json");
         System.out.println(actual);
         assertEquals(expected, actual);
@@ -65,7 +65,7 @@ public class AppTest {
                 + "  - timeout: 50\n"
                 + "}";
 
-        String actual = Differ.generate("json", "src/test/resources/testfile1.json",
+        String actual = Differ.generate("stylish", "src/test/resources/testfile1.json",
                 "src/test/resources/testfile3.json");
         System.out.println(actual);
         assertEquals(expected, actual);
@@ -81,7 +81,7 @@ public class AppTest {
                 + "  + timeout: 20\n"
                 + "  + verbose: true\n"
                 + "}";
-        String actual = Differ.generate("yaml", "src/test/resources/testYaml1.yml",
+        String actual = Differ.generate("stylish", "src/test/resources/testYaml1.yml",
                 "src/test/resources/testYaml2.yml");
         System.out.println(actual);
         assertEquals(expected, actual);
@@ -115,7 +115,7 @@ public class AppTest {
                 + "  + setting3: none\n"
                 + "}";
 
-        String actual = Differ.generate("yaml", "src/test/resources/testYaml11.yml",
+        String actual = Differ.generate("stylish", "src/test/resources/testYaml11.yml",
                 "src/test/resources/testYaml22.yml");
         System.out.println(actual);
         assertEquals(expected, actual);
@@ -130,7 +130,7 @@ public class AppTest {
                 + "  - timeout: 50\n"
                 + "}";
 
-        String actual = Differ.generate("yaml", "src/test/resources/testYaml1.yml",
+        String actual = Differ.generate("stylish", "src/test/resources/testYaml1.yml",
                 "src/test/resources/testYaml3.yml");
         System.out.println(actual);
         assertEquals(expected, actual);

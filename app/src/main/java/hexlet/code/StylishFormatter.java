@@ -1,8 +1,8 @@
 package hexlet.code;
 
-import java.util.*;
+import java.util.Map;
 
-public class SimpleFormatter {
+public class StylishFormatter {
     public static String format(Map<String, Map<String, Object>> map) {
         StringBuilder stringBuilder = new StringBuilder("{");
 

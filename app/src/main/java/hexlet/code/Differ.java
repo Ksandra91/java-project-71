@@ -3,7 +3,11 @@ package hexlet.code;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.TreeSet;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
 public class Differ {
 
@@ -14,9 +18,10 @@ public class Differ {
         String content1 = Files.readString(path1);
         String content2 = Files.readString(path2);
 
+        String dataFormat = getDataFormat(filepath1);
 
-        Map<String, Object> parse1 = Parser.parse(content1, format);
-        Map<String, Object> parse2 = Parser.parse(content2, format);
+        Map<String, Object> parse1 = Parser.parse(content1, dataFormat);
+        Map<String, Object> parse2 = Parser.parse(content2, dataFormat);
 
         Map<String, String> parseMap1 = normalize(parse1);
         Map<String, String> parseMap2 = normalize(parse2);
@@ -24,8 +29,16 @@ public class Differ {
         Map<String, Map<String, Object>> result = findDiff(parseMap1, parseMap2);
 
 
-        System.out.println(result);
-        return SimpleFormatter.format(result);
+        //System.out.println(result);
+
+
+        return switch (format) {
+            case "stylish" -> StylishFormatter.format(result);
+            //case "yml", "yaml" -> SimpleFormatter.format(result);
+            // case "json" -> SimpleFormatter.format(result);
+            default -> throw new Exception("Unknown format: '" + format + "'");
+        };
+        // return SimpleFormatter.format(result);
     }
 
     public static Map<String, String> normalize(Map<String, Object> map) {
@@ -62,5 +75,10 @@ public class Differ {
             id++;
         }
         return result;
+    }
+
+    public static String getDataFormat(String filepath) {
+        String[] array = filepath.split("\\.");
+        return array[1];
     }
 }
