@@ -3,29 +3,29 @@ package hexlet.code.formatters;
 import java.util.Map;
 
 public class StylishFormatter {
-    public static String format(Map<String, Map<String, Object>> map) {
+    public static String format(Map<Map<String, Object>, String> map) {
         StringBuilder stringBuilder = new StringBuilder("{");
 
-        for (Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
+        for (Map.Entry<Map<String, Object>, String> entry : map.entrySet()) {
             stringBuilder.append("\n");
-            stringBuilder.append(addDiffString(entry.getKey()));
-            stringBuilder.append(convertToStringMapKey(entry.getValue()));
-            stringBuilder.append(convertToStringMapValue(entry.getValue()));
+            stringBuilder.append(addDiffString(entry.getValue()));
+            stringBuilder.append(convertToStringMapKey(entry.getKey()));
+            stringBuilder.append(convertToStringMapValue(entry.getKey()));
         }
         stringBuilder.append("\n").append("}");
 
         return stringBuilder.toString();
     }
 
-    public static String addDiffString(String key) {
+    public static String addDiffString(String value) {
 
-        if (key.contains("added") || key.contains("changed_map2")) {
+        if (value.contains("added") || value.contains("new value")) {
             return "  + ";
         }
-        if (key.contains("deleted") || key.contains("changed_map1")) {
+        if (value.contains("deleted") || value.contains("old value")) {
             return "  - ";
         }
-        if (key.contains("unchanged")) {
+        if (value.contains("unchanged")) {
             return "    ";
         }
         return "";
@@ -45,7 +45,6 @@ public class StylishFormatter {
 
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             value = entry.getValue().toString();
-
         }
         return value;
     }

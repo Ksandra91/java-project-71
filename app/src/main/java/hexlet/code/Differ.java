@@ -26,13 +26,10 @@ public class Differ {
         Map<String, Object> parseMap1 = normalize(parse1);
         Map<String, Object> parseMap2 = normalize(parse2);
 
-        Map<String, Map<String, Object>> result = findDiff(parseMap1, parseMap2);
-
-
-        //System.out.println(result);
+        Map<Map<String, Object>, String> result = findDiff(parseMap1, parseMap2);
 
         return Formatter.format(format, result);
-        // return SimpleFormatter.format(result);
+
     }
 
     public static Map<String, Object> normalize(Map<String, Object> map) {
@@ -49,24 +46,26 @@ public class Differ {
         return res;
     }
 
-    public static Map<String, Map<String, Object>> findDiff(Map<String, Object> parseMap1,
+    public static Map<Map<String, Object>, String> findDiff(Map<String, Object> parseMap1,
                                                             Map<String, Object> parseMap2) {
-        Map<String, Map<String, Object>> result = new LinkedHashMap<>();
+        Map<Map<String, Object>, String> result = new LinkedHashMap<>();
         Set<String> keys = new TreeSet<>(parseMap1.keySet());
         keys.addAll(parseMap2.keySet());
-        int id = 0;
+
         for (String key : keys) {
             if (!parseMap1.containsKey(key)) {
-                result.put("added" + id, Map.of(key, parseMap2.get(key)));
+                result.put(Map.of(key, parseMap2.get(key)), "added");
+
             } else if (!parseMap2.containsKey(key)) {
-                result.put("deleted" + id, Map.of(key, parseMap1.get(key)));
+                result.put(Map.of(key, parseMap1.get(key)), "deleted");
+
             } else if (parseMap1.get(key).equals(parseMap2.get(key))) {
-                result.put("unchanged" + id, Map.of(key, parseMap2.get(key)));
+                result.put(Map.of(key, parseMap2.get(key)), "unchanged");
+
             } else {
-                result.put("changed_map1" + id, Map.of(key, parseMap1.get(key)));
-                result.put("changed_map2" + id, Map.of(key, parseMap2.get(key)));
+                result.put(Map.of(key, parseMap1.get(key)), "old value");
+                result.put(Map.of(key, parseMap2.get(key)), "new value");
             }
-            id++;
         }
         return result;
     }

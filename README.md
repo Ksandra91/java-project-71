@@ -23,6 +23,10 @@ Console application that finds the difference between files of different formats
  
 [demo](https://asciinema.org/a/lFlrSv7LbLl2ecSrQAIO14fg6)
 
+**JSON file diff**
+
+[demo](https://asciinema.org/a/JM45Nb3DpPRNvSKX6sJi5yCuY)
+
 
 
 ## How to install and run

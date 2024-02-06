@@ -4,11 +4,11 @@ import java.util.Map;
 
 public class PlainFormatter {
 
-    public static String format(Map<String, Map<String, Object>> map) {
+    public static String format(Map<Map<String, Object>, String> map) {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
+        for (Map.Entry<Map<String, Object>, String> entry : map.entrySet()) {
 
             stringBuilder.append(addDiffString(entry));
         }
@@ -16,26 +16,26 @@ public class PlainFormatter {
     }
 
 
-    public static String addDiffString(Map.Entry<String, Map<String, Object>> entry) {
+    public static String addDiffString(Map.Entry<Map<String, Object>, String> entry) {
         StringBuilder stringBuilder = new StringBuilder();
-        if (entry.getKey().contains("added")) {
+        if (entry.getValue().contains("added")) {
             stringBuilder.append("\n" + "Property ");
-            stringBuilder.append(convertToStringMapKey(entry.getValue()));
+            stringBuilder.append(convertToStringMapKey(entry.getKey()));
             stringBuilder.append(" was added with value: ");
-            stringBuilder.append(convertToStringMapValue(entry.getValue()));
+            stringBuilder.append(convertToStringMapValue(entry.getKey()));
         }
-        if (entry.getKey().contains("deleted")) {
+        if (entry.getValue().contains("deleted")) {
             stringBuilder.append("\n" + "Property ");
-            stringBuilder.append(convertToStringMapKey(entry.getValue()));
+            stringBuilder.append(convertToStringMapKey(entry.getKey()));
             stringBuilder.append(" was removed");
         }
-        if (entry.getKey().contains("changed_map1")) {
+        if (entry.getValue().contains("old value")) {
             stringBuilder.append("\n" + "Property ");
-            stringBuilder.append(convertToStringMapKey(entry.getValue()));
-            stringBuilder.append(" was updated. From ").append(convertToStringMapValue(entry.getValue()));
+            stringBuilder.append(convertToStringMapKey(entry.getKey()));
+            stringBuilder.append(" was updated. From ").append(convertToStringMapValue(entry.getKey()));
         }
-        if (entry.getKey().contains("changed_map2")) {
-            stringBuilder.append(" to ").append(convertToStringMapValue(entry.getValue()));
+        if (entry.getValue().contains("new value")) {
+            stringBuilder.append(" to ").append(convertToStringMapValue(entry.getKey()));
         }
 
         return stringBuilder.toString();
