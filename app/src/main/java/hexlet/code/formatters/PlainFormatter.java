@@ -12,7 +12,8 @@ public class PlainFormatter {
 
             stringBuilder.append(addDiffString(entry));
         }
-        return stringBuilder.toString();
+        String res = stringBuilder.toString();
+        return res.substring(1);
     }
 
 
@@ -23,18 +24,15 @@ public class PlainFormatter {
             stringBuilder.append(convertToStringMapKey(entry.getKey()));
             stringBuilder.append(" was added with value: ");
             stringBuilder.append(convertToStringMapValue(entry.getKey()));
-        }
-        if (entry.getValue().contains("deleted")) {
+        } else if (entry.getValue().contains("deleted")) {
             stringBuilder.append("\n" + "Property ");
             stringBuilder.append(convertToStringMapKey(entry.getKey()));
             stringBuilder.append(" was removed");
-        }
-        if (entry.getValue().contains("old value")) {
+        } else if (entry.getValue().contains("old value")) {
             stringBuilder.append("\n" + "Property ");
             stringBuilder.append(convertToStringMapKey(entry.getKey()));
             stringBuilder.append(" was updated. From ").append(convertToStringMapValue(entry.getKey()));
-        }
-        if (entry.getValue().contains("new value")) {
+        } else if (entry.getValue().contains("new value")) {
             stringBuilder.append(" to ").append(convertToStringMapValue(entry.getKey()));
         }
 
