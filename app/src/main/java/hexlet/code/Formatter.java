@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Formatter {
 
-    public static String format(String format, Map<Map<String, Object>, String> result) throws Exception {
+    public static String format(String format, Map<String, Node> result) throws Exception {
         return switch (format) {
             case "stylish", "" -> StylishFormatter.format(result);
             case "plain" -> PlainFormatter.format(result);

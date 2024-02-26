@@ -3,7 +3,8 @@ package hexlet.code;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,7 +26,6 @@ public class DifferTest {
         return Files.readString(filePath).trim();
     }
 
-    // Побочные эффекты правильно делать не на уровне класса, а внутри хуков
     @BeforeAll
     public static void beforeAll() throws Exception {
         resultJson = readFixture("result_json.json");
@@ -33,69 +33,15 @@ public class DifferTest {
         resultStylish = readFixture("result_stylish.txt");
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    public void generateTest(String format) throws Exception {
+        String filePath1 = getFixturePath("file1." + format).toString();
+        String filePath2 = getFixturePath("file2." + format).toString();
 
-    @Test
-    public void testJsonToStylishFormat() throws Exception {
-        String actual = Differ.generate("stylish", "src/test/resources/testfile11.json",
-                "src/test/resources/testfile22.json");
-        System.out.println(actual);
-        assertEquals(resultStylish, actual);
-    }
-
-    @Test
-    public void testJsonToPlainFormat() throws Exception {
-        String actual = Differ.generate("plain", "src/test/resources/testfile11.json",
-                "src/test/resources/testfile22.json");
-        System.out.println(actual);
-        assertEquals(resultPlain, actual);
-    }
-
-    @Test
-    public void testJsonToJsonFormat() throws Exception {
-        String actual = Differ.generate("json", "src/test/resources/testfile11.json",
-                "src/test/resources/testfile22.json");
-        System.out.println(actual);
-        assertEquals(resultJson, actual);
-    }
-
-    @Test
-    public void testJsonToDefaultFormat() throws Exception {
-        String actual = Differ.generate("", "src/test/resources/testfile11.json",
-                "src/test/resources/testfile22.json");
-        System.out.println(actual);
-        assertEquals(resultStylish, actual);
-    }
-
-    @Test
-    public void testYmlToStylishFormat() throws Exception {
-        String actual = Differ.generate("stylish", "src/test/resources/testYaml11.yml",
-                "src/test/resources/testYaml22.yml");
-        System.out.println(actual);
-        assertEquals(resultStylish, actual);
-    }
-
-    @Test
-    public void testYmlToPlainFormat() throws Exception {
-        String actual = Differ.generate("plain", "src/test/resources/testYaml11.yml",
-                "src/test/resources/testYaml22.yml");
-        System.out.println(actual);
-        assertEquals(resultPlain, actual);
-    }
-
-    @Test
-    public void testYmlToJsonFormat() throws Exception {
-        String actual = Differ.generate("json", "src/test/resources/testYaml11.yml",
-                "src/test/resources/testYaml22.yml");
-        System.out.println(actual);
-        assertEquals(resultJson, actual);
-    }
-
-    @Test
-    public void testYmlToDefaultFormat() throws Exception {
-        String actual = Differ.generate("", "src/test/resources/testYaml11.yml",
-                "src/test/resources/testYaml22.yml");
-        System.out.println(actual);
-        assertEquals(resultStylish, actual);
+        assertEquals(Differ.generate("stylish", filePath1, filePath2), resultStylish);
+        assertEquals(Differ.generate("plain", filePath1, filePath2), resultPlain);
+        assertEquals(Differ.generate("json", filePath1, filePath2), resultJson);
     }
 
 }

@@ -19,12 +19,11 @@ public class Differ {
         Map<String, Object> parse1 = Parser.parse(content1, dataFormat);
         Map<String, Object> parse2 = Parser.parse(content2, dataFormat);
 
-        Map<Map<String, Object>, String> result = Diff.findDiff(parse1, parse2);
+        Map<String, Node> result = Diff.findDiff(parse1, parse2);
 
         return Formatter.format(format, result);
 
     }
-
 
     public static String getDataFormat(String filepath) {
         String[] array = filepath.split("\\.");

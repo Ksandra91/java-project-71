@@ -1,72 +1,60 @@
 package hexlet.code.formatters;
 
+import hexlet.code.Node;
+
 import java.util.Map;
 
 public class PlainFormatter {
 
-    public static String format(Map<Map<String, Object>, String> map) {
+    public static String format(Map<String, Node> map) {
 
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (Map.Entry<Map<String, Object>, String> entry : map.entrySet()) {
-
-            stringBuilder.append(addDiffString(entry));
-        }
-        String res = stringBuilder.toString();
-        return res.substring(1);
-    }
-
-
-    public static String addDiffString(Map.Entry<Map<String, Object>, String> entry) {
-        StringBuilder stringBuilder = new StringBuilder();
-        if (entry.getValue().contains("added")) {
-            stringBuilder.append("\n" + "Property ");
-            stringBuilder.append(convertToStringMapKey(entry.getKey()));
-            stringBuilder.append(" was added with value: ");
-            stringBuilder.append(convertToStringMapValue(entry.getKey()));
-        } else if (entry.getValue().contains("deleted")) {
-            stringBuilder.append("\n" + "Property ");
-            stringBuilder.append(convertToStringMapKey(entry.getKey()));
-            stringBuilder.append(" was removed");
-        } else if (entry.getValue().contains("old value")) {
-            stringBuilder.append("\n" + "Property ");
-            stringBuilder.append(convertToStringMapKey(entry.getKey()));
-            stringBuilder.append(" was updated. From ").append(convertToStringMapValue(entry.getKey()));
-        } else if (entry.getValue().contains("new value")) {
-            stringBuilder.append(" to ").append(convertToStringMapValue(entry.getKey()));
-        }
-
-        return stringBuilder.toString();
-    }
-
-    public static String convertToStringMapKey(Map<String, Object> map) {
-        String key = "";
-
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            key = entry.getKey();
-        }
-        return "'" + key + "'";
-    }
-
-    public static String convertToStringMapValue(Map<String, Object> map) {
-        Object value;
         String result = "";
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            value = entry.getValue();
-            if (value instanceof Integer) {
-                result = value.toString();
-            } else if (value instanceof Boolean) {
-                result = value.toString();
-            } else if (value instanceof String) {
-                if (value.equals("null")) {
-                    result = "null";
-                } else {
-                    result = "'" + value + "'";
-                }
-            } else {
-                result = "[complex value]";
-            }
+        for (Map.Entry<String, Node> entry : map.entrySet()) {
+            result += addDiffString(entry);
         }
+        return result.strip();
+    }
+
+
+    public static String addDiffString(Map.Entry<String, Node> entry) {
+        String key = entry.getKey();
+        String formattedValue1 = convertToStringNodeValue(entry.getValue().newValue);
+        String formattedValue2 = convertToStringNodeValue(entry.getValue().oldValue);
+        String statusName = entry.getValue().statusName;
+
+
+        switch (statusName) {
+            case "added":
+                return "Property '" + key + "' was added"
+                        + " with value: " + formattedValue1 + "\n";
+            case "deleted":
+                return "Property '" + key + "' was removed" + "\n";
+            case "changed":
+                return "Property '" + key + "' was updated."
+                        + " From " + formattedValue2
+                        + " to " + formattedValue1 + "\n";
+            case "unchanged":
+                return "";
+            default:
+                throw new RuntimeException("Unknown node type: '" + statusName + "'");
+        }
+    }
+
+    public static String convertToStringNodeValue(Object value) {
+        String result = "";
+        if (value instanceof Integer) {
+            result = value.toString();
+        } else if (value instanceof Boolean) {
+            result = value.toString();
+        } else if (value instanceof String) {
+            result = "'" + value + "'";
+        } else if (value == null) {
+            result = "null";
+        } else {
+            result = "[complex value]";
+        }
+
         return result;
     }
+
 }
