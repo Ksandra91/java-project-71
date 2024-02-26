@@ -17,18 +17,18 @@ public class StylishFormatter {
 
     public static String addDiffString(String key, Node node) {
 
-        switch (node.statusName) {
+        switch (node.getStatusName()) {
             case "added":
-                return "  + " + key + ": " + node.newValue;
+                return "  + " + key + ": " + node.getNewValue();
             case "deleted":
-                return "  - " + key + ": " + node.oldValue;
+                return "  - " + key + ": " + node.getOldValue();
             case "changed":
-                return "  - " + key + ": " + node.oldValue
-                        + "\n" + "  + " + key + ": " + node.newValue;
+                return "  - " + key + ": " + node.getOldValue()
+                        + "\n" + "  + " + key + ": " + node.getNewValue();
             case "unchanged":
-                return "    " + key + ": " + node.newValue;
+                return "    " + key + ": " + node.getNewValue();
             default:
-                throw new RuntimeException("Unknown status: " + node.statusName);
+                throw new RuntimeException("Unknown status: " + node.getStatusName());
 
         }
     }

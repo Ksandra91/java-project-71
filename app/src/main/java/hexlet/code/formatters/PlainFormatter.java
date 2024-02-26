@@ -18,9 +18,9 @@ public class PlainFormatter {
 
     public static String addDiffString(Map.Entry<String, Node> entry) {
         String key = entry.getKey();
-        String formattedValue1 = convertToStringNodeValue(entry.getValue().newValue);
-        String formattedValue2 = convertToStringNodeValue(entry.getValue().oldValue);
-        String statusName = entry.getValue().statusName;
+        String formattedValue1 = convertToStringNodeValue(entry.getValue().getNewValue());
+        String formattedValue2 = convertToStringNodeValue(entry.getValue().getOldValue());
+        String statusName = entry.getValue().getStatusName();
 
 
         switch (statusName) {
