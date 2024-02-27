@@ -23,8 +23,8 @@ public class App {
 
         @Override
         public String call() throws Exception {
-            System.out.println(Differ.generate(format, filepath1, filepath2));
-            return Differ.generate(format, filepath1, filepath2);
+            System.out.println(Differ.generate(filepath1, filepath2, format));
+            return Differ.generate(filepath1, filepath2, format);
         }
     }
 

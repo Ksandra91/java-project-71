@@ -39,9 +39,9 @@ public class DifferTest {
         String filePath1 = getFixturePath("file1." + format).toString();
         String filePath2 = getFixturePath("file2." + format).toString();
 
-        assertEquals(Differ.generate("stylish", filePath1, filePath2), resultStylish);
-        assertEquals(Differ.generate("plain", filePath1, filePath2), resultPlain);
-        assertEquals(Differ.generate("json", filePath1, filePath2), resultJson);
+        assertEquals(Differ.generate(filePath1, filePath2), resultStylish);
+        assertEquals(Differ.generate(filePath1, filePath2, "plain"), resultPlain);
+        assertEquals(Differ.generate(filePath1, filePath2, "json"), resultJson);
     }
 
 }

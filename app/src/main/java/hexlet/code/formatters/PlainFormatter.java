@@ -2,6 +2,7 @@ package hexlet.code.formatters;
 
 import hexlet.code.Node;
 
+import java.util.List;
 import java.util.Map;
 
 public class PlainFormatter {
@@ -18,8 +19,8 @@ public class PlainFormatter {
 
     public static String addDiffString(Map.Entry<String, Node> entry) {
         String key = entry.getKey();
-        String formattedValue1 = convertToStringNodeValue(entry.getValue().getNewValue());
-        String formattedValue2 = convertToStringNodeValue(entry.getValue().getOldValue());
+        String formattedValue1 = stringify(entry.getValue().getNewValue());
+        String formattedValue2 = stringify(entry.getValue().getOldValue());
         String statusName = entry.getValue().getStatusName();
 
 
@@ -40,21 +41,19 @@ public class PlainFormatter {
         }
     }
 
-    public static String convertToStringNodeValue(Object value) {
-        String result = "";
-        if (value instanceof Integer) {
-            result = value.toString();
-        } else if (value instanceof Boolean) {
-            result = value.toString();
-        } else if (value instanceof String) {
-            result = "'" + value + "'";
-        } else if (value == null) {
-            result = "null";
-        } else {
-            result = "[complex value]";
+    public static String stringify(Object value) {
+        if (value == null) {
+            return "null";
         }
 
-        return result;
+        if (value instanceof String) {
+            return "'" + value + "'";
+        }
+
+        if (value instanceof Map || value instanceof List) {
+            return "[complex value]";
+        }
+        return value.toString();
     }
 
 }

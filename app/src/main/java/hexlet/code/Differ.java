@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Differ {
 
-    public static String generate(String format, String filepath1, String filepath2) throws Exception {
+    public static String generate(String filepath1, String filepath2, String format) throws Exception {
 
         Path path1 = Paths.get(filepath1).toAbsolutePath().normalize();
         Path path2 = Paths.get(filepath2).toAbsolutePath().normalize();
@@ -25,8 +25,15 @@ public class Differ {
 
     }
 
-    public static String getDataFormat(String filepath) {
-        String[] array = filepath.split("\\.");
-        return array[1];
+    public static String generate(String filePath1, String filePath2) throws Exception {
+        return generate(filePath1, filePath2, "stylish");
+    }
+
+
+    public static String getDataFormat(String filePath) {
+        int index = filePath.lastIndexOf('.');
+        return index > 0
+                ? filePath.substring(index + 1)
+                : "";
     }
 }
