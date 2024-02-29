@@ -9,23 +9,23 @@ Console application that finds the difference between files of different formats
 
 **JSON diff**
 
-[demo](https://asciinema.org/a/TbeekrtJAMVCSH6GDfnrAJZ3H)
+[demo](https://asciinema.org/a/5eO5pumKcriwWMFAb4hAWY9fM)
 
 **YAML diff**
 
-[demo](https://asciinema.org/a/J7f7fXhkLPMJ11cgF6T1GnOJk)
+[demo](https://asciinema.org/a/yOkXtZe48xDZjFfTDxi3OUjn6)
 
 **Nested diff**
 
-[demo](https://asciinema.org/a/pOkptriYZ9JjMC7iQj9FT5pEV)
+[demo](https://asciinema.org/a/8wRWsW3m5nM18vJGu9E2gHc61)
 
 **Plain diff**
  
-[demo](https://asciinema.org/a/lFlrSv7LbLl2ecSrQAIO14fg6)
+[demo](https://asciinema.org/a/8PJcRVuBRM17BTS2e2jOGsPYA)
 
 **JSON file diff**
 
-[demo](https://asciinema.org/a/JM45Nb3DpPRNvSKX6sJi5yCuY)
+[demo](https://asciinema.org/a/MnZApEUj3J7gl9BvSqOnEth1x)
 
 
 
